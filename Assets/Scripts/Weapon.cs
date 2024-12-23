@@ -24,6 +24,17 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
+        // Trigger the recoil animation
         animator.SetTrigger("RECOIL");
+
+        // Play the shooting sound
+        if (SoundManager.Instance != null && SoundManager.Instance.shootingSound1911 != null)
+        {
+            SoundManager.Instance.shootingSound1911.Play();
+        }
+        else
+        {
+            Debug.LogWarning("SoundManager or shootingSound1911 is not assigned!");
+        }
     }
 }
