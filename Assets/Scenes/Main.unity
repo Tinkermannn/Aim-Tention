@@ -841,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2161542133114216403, guid: 27505b7db16121447963b4e769520bea, type: 3}
       propertyPath: m_Name
-      value: Target (1)
+      value: TargetClone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
