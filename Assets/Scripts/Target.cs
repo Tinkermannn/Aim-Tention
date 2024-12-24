@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public void Hit() {
+    private FlickTargetSpawner spawner;
+
+    public void Initialize(FlickTargetSpawner spawner)
+    {
+        this.spawner = spawner;
+    }
+
+public void Hit()
+{
+    if (spawner != null && spawner.GetFlickModeStatus())
+    {
+        Destroy(gameObject);
+    }
+    else
+    {
         transform.position = TargetBounds.Instance.GetRandomPosition();
     }
+}
+
 }
