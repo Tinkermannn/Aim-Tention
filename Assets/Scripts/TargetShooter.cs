@@ -10,19 +10,25 @@ public class TargetShooter : MonoBehaviour
     private Animator animator;
     public Weapon weapon;
 
-    void Awake() {
+    void Awake()
+    {
         animator = GetComponent<Animator>();
     }
-    void Update() {
-        if(Input.GetMouseButtonDown(0)) {
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Klik kiri untuk menembak
+        {
             muzzleEffect.GetComponent<ParticleSystem>().Play();
-            weapon.Shoot(); // panggil disini
+            weapon.Shoot();
+
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-            if(Physics.Raycast(ray, out RaycastHit hit)) {
-                Target target = hit.collider.gameObject.GetComponent<Target>();
-                
-                if(target != null) {
-                    target.Hit();
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Target target = hit.collider.GetComponent<Target>();
+                if (target != null)
+                {
+                    target.Hit(); // Hancurkan target jika terkena tembakan
                 }
             }
         }
