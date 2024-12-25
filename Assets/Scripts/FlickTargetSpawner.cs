@@ -6,9 +6,11 @@ public class FlickTargetSpawner : MonoBehaviour
     [SerializeField] private GameObject targetPrefab; // Target prefab to spawn
     [SerializeField] private float spawnInterval = 1f; // Interval between spawns
     [SerializeField] private float targetLifetime = 3f; // Lifetime of targets
+    [SerializeField] private float gameDuration = 30f; // Durasi permainan dalam detik
 
     private bool isFlickModeActive = false;
-
+    private float timer = 0f; // Timer internal
+    private bool isGameRunning = false;
     void Start()
     {
         StartCoroutine(SpawnTargets());
@@ -18,7 +20,7 @@ public class FlickTargetSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (isFlickModeActive)
+            if (isFlickModeActive && isGameRunning)
             {
                 SpawnTarget();
             }
@@ -38,15 +40,51 @@ public class FlickTargetSpawner : MonoBehaviour
         isFlickModeActive = isActive;
 
         ToggleNormalTargets(!isActive);
+
+        if (isActive)
+        {
+            StartGameTimer();
+        }
+        else
+        {
+            StopGame();
+        }
     }
 
-     private void ToggleNormalTargets(bool show)
+    private void ToggleNormalTargets(bool show)
     {
         GameObject[] normalTargets = GameObject.FindGameObjectsWithTag("Normal");
         foreach (GameObject target in normalTargets)
         {
             target.SetActive(show); // Sembunyikan atau tampilkan
         }
+    }
+
+    private void StartGameTimer()
+    {
+        timer = 0f;
+        isGameRunning = true;
+        StartCoroutine(GameTimer());
+    }
+
+    private IEnumerator GameTimer()
+    {
+        while (timer < gameDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        StopGame(); // Hentikan permainan setelah waktu habis
+    }
+
+    private void StopGame()
+    {
+        isGameRunning = false;
+        isFlickModeActive = false;
+
+        ToggleNormalTargets(true); // Tampilkan kembali target "Normal"
+        Debug.Log("Game Over! Timer Ended.");
     }
 
     public bool GetFlickModeStatus()
@@ -61,5 +99,4 @@ public class FlickTargetSpawner : MonoBehaviour
         destroyedTargets++;
         Debug.Log($"Destroyed Targets: {destroyedTargets}");
     }
-
 }
