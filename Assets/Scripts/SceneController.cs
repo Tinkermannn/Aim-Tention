@@ -11,5 +11,7 @@ public class SceneController : MonoBehaviour
     public void LoaStartScene()
     {
         SceneManager.LoadScene("Start"); // Ganti "Start" dengan nama scene Main Anda
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
