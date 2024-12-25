@@ -3,12 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public void NormalMode()
+    public static void NormalMode()
     {
         SceneManager.LoadScene("Main"); // Ganti "Main" dengan nama scene Main Anda
     }
 
-    public void SetFlick()
+    public static void SetFlick()
     {
         SceneManager.LoadScene("Main");
         GameManager.flick = true;

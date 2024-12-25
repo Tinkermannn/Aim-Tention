@@ -9,10 +9,10 @@ public class FlickTargetSpawner : MonoBehaviour
     [SerializeField] private float gameDuration = 30f; // Durasi permainan dalam detik
 
     private bool isFlickModeActive = false;
-    private float timer = 0f; // Timer internal
     private bool isGameRunning = false;
     void Start()
     {
+        Timer.gameOver = false;
         StartCoroutine(SpawnTargets());
     }
 
@@ -43,7 +43,8 @@ public class FlickTargetSpawner : MonoBehaviour
 
         if (isActive)
         {
-            StartGameTimer();
+            Timer.start = true;
+            isGameRunning = true;
         }
         else
         {
@@ -60,28 +61,11 @@ public class FlickTargetSpawner : MonoBehaviour
         }
     }
 
-    private void StartGameTimer()
-    {
-        timer = 0f;
-        isGameRunning = true;
-        StartCoroutine(GameTimer());
-    }
-
-    private IEnumerator GameTimer()
-    {
-        while (timer < gameDuration)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        StopGame(); // Hentikan permainan setelah waktu habis
-    }
-
     private void StopGame()
     {
         isGameRunning = false;
         isFlickModeActive = false;
+        Timer.start = false;
 
         ToggleNormalTargets(true); // Tampilkan kembali target "Normal"
         Debug.Log("Game Over! Timer Ended.");

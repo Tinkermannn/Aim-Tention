@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Data.Common;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class TargetShooter : MonoBehaviour
@@ -11,7 +12,6 @@ public class TargetShooter : MonoBehaviour
 
     private Animator animator;
     private bool isGameRunning = false; // Permainan dimulai dengan false
-    public static bool gameOver = false; // Permainan dimulai dengan false
 
     void Awake()
     {
@@ -20,14 +20,15 @@ public class TargetShooter : MonoBehaviour
 
     void Start(){
         instance = this;
-        gameOver = false;
+        Timer.gameOver = false;
     }
+
     void Update()
     {
         // Mulai permainan dengan tombol N
         if (Input.GetKeyDown(KeyCode.N) && !isGameRunning)
         {
-            StartGame();
+            SceneController.NormalMode();
         }
 
         if (Input.GetMouseButtonDown(0)) // Klik kiri untuk menembak
@@ -46,20 +47,13 @@ public class TargetShooter : MonoBehaviour
             }
         }
 
-        if (gameOver == true){
+        if (Timer.gameOver == true){
             EndGame();
         }
     }
-
-    private void StartGame()
-    {
-        gameOver = false;
-        isGameRunning = true;
-        Debug.Log("Game Started!");
-    }
-
     private void EndGame()
     {
+        Timer.start = false;
         isGameRunning = false;
         Debug.Log("Game Over! Time's up.");
         // Tambahkan logika untuk mengakhiri permainan, seperti menampilkan UI game over
