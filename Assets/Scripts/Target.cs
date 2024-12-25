@@ -16,7 +16,6 @@ public class Target : MonoBehaviour
         if (spawner != null && spawner.GetFlickModeStatus())
         {
             Destroy(gameObject);
-
         }
         else
         {

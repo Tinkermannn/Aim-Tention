@@ -1,22 +1,27 @@
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 
 public class TargetShooter : MonoBehaviour
 {
+    public static TargetShooter instance;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject muzzleEffect;
     [SerializeField] private Weapon weapon;
-    [SerializeField] private float gameDuration = 30f; // Durasi permainan dalam detik
 
     private Animator animator;
-    private float timer = 0f; // Timer internal
     private bool isGameRunning = false; // Permainan dimulai dengan false
+    public static bool gameOver = false; // Permainan dimulai dengan false
 
     void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
+    void Start(){
+        instance = this;
+        gameOver = false;
+    }
     void Update()
     {
         // Mulai permainan dengan tombol N
@@ -40,26 +45,17 @@ public class TargetShooter : MonoBehaviour
                 }
             }
         }
+
+        if (gameOver == true){
+            EndGame();
+        }
     }
 
     private void StartGame()
     {
+        gameOver = false;
         isGameRunning = true;
-        timer = 0f; // Reset timer
-        StartCoroutine(GameTimer());
         Debug.Log("Game Started!");
-    }
-
-    private IEnumerator GameTimer()
-    {
-        while (timer < gameDuration)
-        {
-            timer += Time.deltaTime;
-            Debug.Log($"Game Timer: {timer:F2} seconds"); // Logging waktu berjalan
-            yield return null;
-        }
-
-        EndGame(); // Panggil fungsi untuk mengakhiri permainan setelah waktu habis
     }
 
     private void EndGame()
