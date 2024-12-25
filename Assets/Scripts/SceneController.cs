@@ -7,4 +7,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Main"); // Ganti "Main" dengan nama scene Main Anda
     }
+    
+    public void LoaStartScene()
+    {
+        SceneManager.LoadScene("Start"); // Ganti "Start" dengan nama scene Main Anda
+    }
 }

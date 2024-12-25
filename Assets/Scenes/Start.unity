@@ -2796,7 +2796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMount: {fileID: 540226104}
   speedFactor: 0.1
-  zoomFactor: 60
+  zoomFactor: 100
   lastPosition: {x: 0, y: 0, z: 0}
   cameraComp: {fileID: 1019210158}
 --- !u!1 &1587700634
