@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 120568764}
   - component: {fileID: 120568763}
   - component: {fileID: 120568766}
+  - component: {fileID: 120568767}
   m_Layer: 0
   m_Name: NormalMode
   m_TagString: Untagged
@@ -391,7 +392,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 120568766}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: NormalMode
+        m_MethodName: LoadMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 120568767}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: noFlick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -449,6 +462,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8610be8aad5ac3440a682062198e3911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &120568767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120568761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0817dd7c4138e47aed8195d3c2fa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &153422770
@@ -1964,6 +1989,7 @@ GameObject:
   - component: {fileID: 1181159750}
   - component: {fileID: 1181159749}
   - component: {fileID: 1181159752}
+  - component: {fileID: 1181159753}
   m_Layer: 0
   m_Name: FlickMode
   m_TagString: Untagged
@@ -2037,7 +2063,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1181159752}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: SetFlick
+        m_MethodName: LoadMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2047,9 +2073,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1181159753}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetFlick
+        m_MethodName: setFlick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2107,6 +2133,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8610be8aad5ac3440a682062198e3911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1181159753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181159747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0817dd7c4138e47aed8195d3c2fa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1208850971

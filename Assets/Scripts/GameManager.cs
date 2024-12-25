@@ -1,21 +1,27 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private FlickTargetSpawner flickTargetSpawner;
     public static bool flick = false;
+    public static int targetHit = 0;
+    public static int targetMissed = 0;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) // Example toggle with "F" key
-        {
-            flick = true;
-        }
-        SetFlick(flick);
+        
     }
 
-    public void SetFlick(bool flick)
+    void Start()
     {
-        flickTargetSpawner.ActivateFlickMode(flick);
+
+    }
+
+    public void setFlick(){
+        flick = true;
+    }
+    
+    public void noFlick(){
+        flick = false;
     }
 }

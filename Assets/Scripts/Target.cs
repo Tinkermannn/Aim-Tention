@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    private FlickTargetSpawner spawner;
-
-    public void Initialize(FlickTargetSpawner spawner)
-    {
-        this.spawner = spawner;
-    }
+    public static bool isHit = false;
 
     public void Hit()
     {
+        /*
         if (spawner != null && spawner.GetFlickModeStatus())
         {
             Destroy(gameObject);
@@ -21,6 +17,9 @@ public class Target : MonoBehaviour
         {
             transform.position = TargetBounds.Instance.GetRandomPosition();
         }
+        */
+        Destroy(gameObject);
+        FlickTargetSpawner.targetCount = 0;
         
         if (SoundManager.Instance != null && SoundManager.Instance.destroyedSound != null)
         {
@@ -31,5 +30,4 @@ public class Target : MonoBehaviour
             Debug.LogWarning("SoundManager or shootingSound1911 is not assigned!");
         }
     }
-
 }

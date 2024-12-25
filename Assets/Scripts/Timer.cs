@@ -28,8 +28,8 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                start=false;
-                gameOver=true;
+                //start=false;
+                gameOver=true;  
                 timer = 30f;
                 timerLbl.text = "Time's Up";
             }
