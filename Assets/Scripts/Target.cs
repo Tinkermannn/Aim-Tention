@@ -11,16 +11,26 @@ public class Target : MonoBehaviour
         this.spawner = spawner;
     }
 
-public void Hit()
-{
-    if (spawner != null && spawner.GetFlickModeStatus())
+    public void Hit()
     {
-        Destroy(gameObject);
+        if (spawner != null && spawner.GetFlickModeStatus())
+        {
+            Destroy(gameObject);
+
+        }
+        else
+        {
+            transform.position = TargetBounds.Instance.GetRandomPosition();
+        }
+        
+        if (SoundManager.Instance != null && SoundManager.Instance.destroyedSound != null)
+        {
+            SoundManager.Instance.destroyedSound.Play();
+        }
+        else
+        {
+            Debug.LogWarning("SoundManager or shootingSound1911 is not assigned!");
+        }
     }
-    else
-    {
-        transform.position = TargetBounds.Instance.GetRandomPosition();
-    }
-}
 
 }
