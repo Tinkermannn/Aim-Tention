@@ -28,13 +28,13 @@ public class Weapon : MonoBehaviour
         animator.SetTrigger("RECOIL");
 
         // Play the shooting sound
-        if (SoundManager.Instance != null && SoundManager.Instance.shootingSound1911 != null)
+        if (SoundManager.Instance != null && SoundManager.Instance.shootingSound != null)
         {
-            SoundManager.Instance.shootingSound1911.Play();
+            SoundManager.Instance.shootingSound.Play();
         }
         else
         {
-            Debug.LogWarning("SoundManager or shootingSound1911 is not assigned!");
+            Debug.LogWarning("SoundManager or shootingSound is not assigned!");
         }
     }
 }
