@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Data.Common;
 using UnityEditor.SearchService;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,11 +33,22 @@ public class TargetShooter : MonoBehaviour
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
+                Debug.Log($"Hit object: {hit.collider.gameObject.name}");
+
+               Button button = hit.collider.GetComponentInParent<Button>() ?? hit.collider.GetComponentInChildren<Button>();
+                if (button != null)
+                {
+                    button.onClick.Invoke(); // Memanggil event onClick Button
+                    Debug.Log($"Button {button.name} clicked via shooting!");
+                }
+                else
+                {
                 Target target = hit.collider.GetComponent<Target>();
                 if (target != null)
                 {
                     target.Hit();
                     hitCount++; // Hancurkan target jika terkena tembakan
+                }
                 }
             }
         }
