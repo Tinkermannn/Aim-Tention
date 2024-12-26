@@ -3,6 +3,7 @@ using System.Data.Common;
 using UnityEditor.SearchService;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetShooter : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TargetShooter : MonoBehaviour
     [SerializeField] private Weapon weapon;
 
     public static int shootCount = 0;
+    public static int hitCount = 0;
+    public static int missedCount = 0;
 
     private Animator animator; // Permainan dimulai dengan false
 
@@ -43,7 +46,8 @@ public class TargetShooter : MonoBehaviour
                 Target target = hit.collider.GetComponent<Target>();
                 if (target != null)
                 {
-                    target.Hit(); // Hancurkan target jika terkena tembakan
+                    target.Hit();
+                    hitCount++; // Hancurkan target jika terkena tembakan
                 }
                 }
             }
