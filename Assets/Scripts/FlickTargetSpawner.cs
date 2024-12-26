@@ -22,20 +22,20 @@ public class FlickTargetSpawner : MonoBehaviour
         {
             StartNormal();
         }
-        if (early == true && isGameRunning == false && GameManager.flick == false)
-        {
-            StartNormal();
-            early = false;
-        }
+            if (early == true && isGameRunning == false && GameManager.flick == false)
+            {
+                StartNormal();
+                early = false;
+            }
         if (Input.GetKeyDown(KeyCode.F) && isGameRunning == false)
         {
             StartFlick();
         }
-        if (early == true && isGameRunning == false && GameManager.flick == true)
-        {
-            StartFlick();
-            early = false;
-        }
+            if (early == true && isGameRunning == false && GameManager.flick == true)
+            {
+                StartFlick();
+                early = false;
+            }
         if (Timer.gameOver == true){
             StopGame();
             Timer.gameOver = false;
@@ -44,6 +44,7 @@ public class FlickTargetSpawner : MonoBehaviour
 
     private void StartNormal()
     {
+        
         TargetShooter.shootCount = 0;
         Activate();
         StartCoroutine(SpawnNormalTargets());
@@ -78,9 +79,9 @@ public class FlickTargetSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (targetCount<1){
+            if (targetCount<2){
                 SpawnNormalTarget();
-                targetCount = 1;
+                targetCount++;
             }
             yield return null;
 

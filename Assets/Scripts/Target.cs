@@ -5,7 +5,6 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public static bool isHit = false;
-
     public void Hit()
     {
         /*
@@ -19,7 +18,7 @@ public class Target : MonoBehaviour
         }
         */
         Destroy(gameObject);
-        FlickTargetSpawner.targetCount = 0;
+        FlickTargetSpawner.targetCount--;
         
         if (SoundManager.Instance != null && SoundManager.Instance.destroyedSound != null)
         {

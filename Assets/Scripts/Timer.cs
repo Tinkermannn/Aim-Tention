@@ -10,12 +10,12 @@ public class Timer : MonoBehaviour
     {
         
     }
-
+    private const float time = 5f;
     // Update is called once per frame
     public TextMeshProUGUI timerLbl;
     public static bool start;
     public static bool gameOver;
-    [SerializeField] public static float timer = 30f;
+    [SerializeField] public static float timer = time;
     private void Update()
     {
         if (start == true) 
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
             {
                 //start=false;
                 gameOver=true;  
-                timer = 30f;
+                timer = time;
                 timerLbl.text = "Time's Up";
             }
         }

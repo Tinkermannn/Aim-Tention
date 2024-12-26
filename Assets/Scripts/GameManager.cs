@@ -24,4 +24,12 @@ public class GameManager : MonoBehaviour
     public void noFlick(){
         flick = false;
     }
+
+    public void playAgain()
+    {
+        if (flick == true){
+            setFlick();
+        }
+        else noFlick();
+    }
 }
