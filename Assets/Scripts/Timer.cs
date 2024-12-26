@@ -25,13 +25,15 @@ public class Timer : MonoBehaviour
                 gameOver=false;
                 timer -= Time.deltaTime;
                 DisplayTime(timer);
+                Debug.Log("GameOver = false");
             }
             else
             {
                 //start=false;
-                gameOver=true;  
+                gameOver = true;
                 timer = time;
                 timerLbl.text = "Time's Up";
+                Debug.Log("GameOver = true");
             }
         }
     }
