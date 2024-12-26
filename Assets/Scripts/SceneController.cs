@@ -19,4 +19,9 @@ public class SceneController : MonoBehaviour
     {
         FlickTargetSpawner.early = true; 
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
