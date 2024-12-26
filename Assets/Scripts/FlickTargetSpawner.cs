@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class FlickTargetSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject targetPrefab; // Target prefab to spawn
+    [SerializeField] private GameObject targetPrefab;
+    [SerializeField] private GameObject EndStats; // Target prefab to spawn
     [SerializeField] private float spawnInterval = 1f; // Interval between spawns
     [SerializeField] private float targetLifetime = 3f; // Lifetime of targets
 
@@ -11,9 +12,12 @@ public class FlickTargetSpawner : MonoBehaviour
     public static bool early = false;
     public static int targetCount = 0;
     public static int targetSpawned = 0;
+
+    private Vector3 statsInitPos;
     void Start()
     {
-
+        statsInitPos = EndStats.transform.position;
+        hideStats();
     }
 
     void Update ()
@@ -37,6 +41,8 @@ public class FlickTargetSpawner : MonoBehaviour
                 early = false;
             }
         if (Timer.gameOver == true){
+            showStats();
+            ClearTargets();
             StopGame();
             Timer.gameOver = false;
         }
@@ -44,7 +50,7 @@ public class FlickTargetSpawner : MonoBehaviour
 
     private void StartNormal()
     {
-        
+        hideStats();
         TargetShooter.shootCount = 0;
         Activate();
         StartCoroutine(SpawnNormalTargets());
@@ -52,6 +58,7 @@ public class FlickTargetSpawner : MonoBehaviour
 
     private void StartFlick()
     {
+        hideStats();
         TargetShooter.shootCount = 0;
         Activate();
         StartCoroutine(SpawnFlickTargets());
@@ -95,6 +102,16 @@ public class FlickTargetSpawner : MonoBehaviour
         GameObject target = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
     }
 
+    private void ClearTargets()
+    {
+        GameObject[] normalTargets = GameObject.FindGameObjectsWithTag("Respawn");
+        foreach (GameObject target in normalTargets)
+        {
+            Destroy(target);// Sembunyikan atau tampilkan
+        }
+        targetCount = 0;
+    }
+
     public void Activate()
     {
         Timer.start = true;
@@ -106,5 +123,16 @@ public class FlickTargetSpawner : MonoBehaviour
         isGameRunning = false;
         Timer.start = false; // Tampilkan kembali target "Normal"
         Debug.Log("Game Over! Timer Ended.");
+    }
+
+    private void hideStats()
+    {
+        EndStats.transform.position += new Vector3(0,-10,0);
+        Debug.Log("StatsHidden");
+    }
+    private void showStats()
+    {
+        EndStats.transform.position = statsInitPos;
+        Debug.Log("StatsShown");
     }
 }

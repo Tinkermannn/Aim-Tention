@@ -35,7 +35,7 @@ public class TargetShooter : MonoBehaviour
             {
                 Debug.Log($"Hit object: {hit.collider.gameObject.name}");
 
-               Button button = hit.collider.GetComponentInParent<Button>() ?? hit.collider.GetComponentInChildren<Button>();
+                Button button = hit.collider.GetComponentInParent<Button>() ?? hit.collider.GetComponentInChildren<Button>();
                 if (button != null)
                 {
                     button.onClick.Invoke(); // Memanggil event onClick Button
