@@ -3,15 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public void LoadMainScene()
+    public void LoadMain()
     {
-        SceneManager.LoadScene("Main"); // Ganti "Main" dengan nama scene Main Anda
-    }
-    
-    public void LoaStartScene()
-    {
-        SceneManager.LoadScene("Start"); // Ganti "Start" dengan nama scene Main Anda
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Main");
+        FlickTargetSpawner.early = true; // Ganti "Main" dengan nama scene Main Anda
     }
 }

@@ -1,17 +1,30 @@
 using System.Collections;
+<<<<<<< HEAD
 using UnityEngine;
 using UnityEngine.UI;
+=======
+using System.Data.Common;
+using UnityEditor.SearchService;
+using UnityEngine;
+>>>>>>> 2eded99efb4cb4bc2eac0f8a0b1c7c83036cae1d
 
 public class TargetShooter : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject muzzleEffect;
     [SerializeField] private Weapon weapon;
+<<<<<<< HEAD
     [SerializeField] private float gameDuration = 30f;
 
     private Animator animator;
     private float timer = 0f;
     private bool isGameRunning = false;
+=======
+
+    public static int shootCount = 0;
+
+    private Animator animator; // Permainan dimulai dengan false
+>>>>>>> 2eded99efb4cb4bc2eac0f8a0b1c7c83036cae1d
 
     void Awake()
     {
@@ -20,75 +33,22 @@ public class TargetShooter : MonoBehaviour
 
     void Update()
     {
-        // Mulai permainan dengan tombol N
-        if (Input.GetKeyDown(KeyCode.N) && !isGameRunning)
-        {
-            StartGame();
-        }
-
         if (Input.GetMouseButtonDown(0)) // Klik kiri untuk menembak
         {
             muzzleEffect.GetComponent<ParticleSystem>().Play();
             weapon.Shoot();
+            shootCount++;
 
-            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f)); // Ray dari tengah layar
+            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                // Debug: Tampilkan nama objek yang terkena
-                Debug.Log($"Hit object: {hit.collider.gameObject.name}");
-
-                // Mencari komponen Button di parent atau child dari objek yang terkena
-                Button button = hit.collider.GetComponentInParent<Button>() ?? hit.collider.GetComponentInChildren<Button>();
-                if (button != null)
+                Target target = hit.collider.GetComponent<Target>();
+                if (target != null)
                 {
-                    button.onClick.Invoke(); // Memanggil event onClick Button
-                    Debug.Log($"Button {button.name} clicked via shooting!");
+                    target.Hit(); // Hancurkan target jika terkena tembakan
                 }
-                else
-                {
-                    // Jika bukan button, periksa apakah itu target
-                    Target target = hit.collider.GetComponentInParent<Target>() ?? hit.collider.GetComponentInChildren<Target>();
-                    if (target != null)
-                    {
-                        target.Hit(); // Hancurkan target jika terkena tembakan
-                        Debug.Log($"Target {target.name} hit!");
-                    }
-                    else
-                    {
-                        Debug.Log("Hit object has no Button or Target component.");
-                    }
-                }
-            }
-            else
-            {
-                Debug.Log("No object hit by the ray.");
             }
         }
     }
 
-    private void StartGame()
-    {
-        isGameRunning = true;
-        timer = 0f;
-        StartCoroutine(GameTimer());
-        Debug.Log("Game Started!");
-    }
-
-    private IEnumerator GameTimer()
-    {
-        while (timer < gameDuration)
-        {
-            timer += Time.deltaTime;
-            Debug.Log($"Game Timer: {timer:F2} seconds");
-            yield return null;
-        }
-
-        EndGame();
-    }
-
-    private void EndGame()
-    {
-        isGameRunning = false;
-        Debug.Log("Game Over! Time's up.");
-    }
 }
