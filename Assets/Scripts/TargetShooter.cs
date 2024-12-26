@@ -3,7 +3,7 @@ using System.Data.Common;
 using UnityEditor.SearchService;
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class TargetShooter : MonoBehaviour
 {

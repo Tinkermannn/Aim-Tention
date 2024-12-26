@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "FINPRO_OOP_GROUP6.sln"
+    "dotnet.defaultSolution": "FINPROGROUP6.sln"
 }
