@@ -8,9 +8,9 @@ public class FlickTargetSpawner : MonoBehaviour
     [SerializeField] private float targetLifetime = 3f; // Lifetime of targets
 
     public static bool isGameRunning = false;
-
     public static bool early = false;
     public static int targetCount = 0;
+    public static int targetSpawned = 0;
     void Start()
     {
 
