@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    
     public void LoadMain()
     {
         SceneManager.LoadScene("Main"); // Ganti "Main" dengan nama scene Main Anda 
