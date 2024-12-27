@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class FlickTargetSpawner : MonoBehaviour
@@ -11,7 +12,7 @@ public class FlickTargetSpawner : MonoBehaviour
     public static bool isGameRunning = false;
     public static bool early = false;
     public static int targetCount = 0;
-    public static int targetSpawned = 0;
+    public static int spawned = 0;
 
     private Vector3 statsInitPos;
     void Start()
@@ -47,21 +48,28 @@ public class FlickTargetSpawner : MonoBehaviour
             Timer.gameOver = false;
         }
     }
-
     private void StartNormal()
     {
+        spawned = 0;
         hideStats();
-        TargetShooter.shootCount = 0;
+        TargetShooter.shootCount = 1;
+        TargetShooter.hitCount = 1;
         Activate();
         StartCoroutine(SpawnNormalTargets());
     }
 
     private void StartFlick()
     {
+        spawned = 0;
         hideStats();
-        TargetShooter.shootCount = 0;
+        TargetShooter.shootCount = 1;
+        TargetShooter.hitCount = 1;
         Activate();
         StartCoroutine(SpawnFlickTargets());
+    }
+    private IEnumerator CountDown()
+    {
+        yield return new WaitForSeconds(3);
     }
 
     private IEnumerator SpawnFlickTargets()
@@ -69,6 +77,7 @@ public class FlickTargetSpawner : MonoBehaviour
         while (true)
         {
             SpawnFlickTarget();
+            spawned++;
             yield return new WaitForSeconds(spawnInterval);
 
             if (Timer.gameOver == true||isGameRunning == false) break;
@@ -79,7 +88,8 @@ public class FlickTargetSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = TargetBounds.Instance.GetRandomPosition();
         GameObject target = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
-        Destroy(target, targetLifetime);
+        float randomNumber = Random.Range(1.0f, targetLifetime);
+        Destroy(target, randomNumber);  
     }
 
     private IEnumerator SpawnNormalTargets()
@@ -89,6 +99,7 @@ public class FlickTargetSpawner : MonoBehaviour
             if (targetCount<2){
                 SpawnNormalTarget();
                 targetCount++;
+                spawned++;
             }
             yield return null;
 
@@ -115,6 +126,7 @@ public class FlickTargetSpawner : MonoBehaviour
     public void Activate()
     {
         Timer.start = true;
+        CountDown();
         isGameRunning = true;
     }
 

@@ -12,8 +12,7 @@ public class TargetShooter : MonoBehaviour
     [SerializeField] private Weapon weapon;
 
     public static int shootCount = 0;
-    public static int hitCount = 0;
-    public static int missedCount = 0;
+    public static int hitCount = 1;
 
     private Animator animator; // Permainan dimulai dengan false
 

@@ -10,11 +10,15 @@ public class Timer : MonoBehaviour
     {
         
     }
-    private const float time = 5f;
+    private const float time = 10f;
     // Update is called once per frame
     public TextMeshProUGUI timerLbl;
+    public TextMeshProUGUI HitLbl;
+    public TextMeshProUGUI PointsLbl;
     public static bool start;
     public static bool gameOver;
+
+    private bool active;
     [SerializeField] public static float timer = time;
     private void Update()
     {
@@ -25,6 +29,8 @@ public class Timer : MonoBehaviour
                 gameOver=false;
                 timer -= Time.deltaTime;
                 DisplayTime(timer);
+                DisplayPoints();
+                DisplayHit();
                 Debug.Log("GameOver = false");
             }
             else
@@ -41,7 +47,20 @@ public class Timer : MonoBehaviour
     private void DisplayTime(float displayTime){
         float minutes = Mathf.FloorToInt(displayTime/60);
         float seconds = Mathf.FloorToInt(displayTime%60);
-        timerLbl.text = $"{minutes}:{seconds}";
+        if (seconds<10f){
+            timerLbl.text = $"0{minutes}:0{seconds}";
+        }
+        else timerLbl.text = $"0{minutes}:{seconds}";
+    }
+
+    private void DisplayPoints()
+    {
+        PointsLbl.text = $"{EndGameStats.points}";
+    }
+
+    private void DisplayHit()
+    {
+        HitLbl.text = $"{TargetShooter.hitCount-1}/{EndGameStats.totalTarget}";
     }
 
 }
