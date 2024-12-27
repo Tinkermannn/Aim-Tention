@@ -67,11 +67,6 @@ public class FlickTargetSpawner : MonoBehaviour
         Activate();
         StartCoroutine(SpawnFlickTargets());
     }
-    private IEnumerator CountDown()
-    {
-        yield return new WaitForSeconds(3);
-    }
-
     private IEnumerator SpawnFlickTargets()
     {
         while (true)
@@ -126,7 +121,6 @@ public class FlickTargetSpawner : MonoBehaviour
     public void Activate()
     {
         Timer.start = true;
-        CountDown();
         isGameRunning = true;
     }
 

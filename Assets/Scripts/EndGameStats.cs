@@ -15,13 +15,7 @@ public class EndGameStats : MonoBehaviour
     public TextMeshProUGUI TargetHit;
     public TextMeshProUGUI ShotsFired;
     public TextMeshProUGUI Accuracy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (points < 0)
